@@ -4,9 +4,9 @@ Nebula is a small framework for building web applications with JavaScript.
 
 Nebula is 100 lines of code, because it combines an existing set of composable libraries.
 
-* Component rendering - [react](https://reactjs.org/), [preact](https://preactjs.com/) or a custom renderer
-* State management - [tiny-atom](https://qubitproducts.github.io/tiny-atom)
-* Routing - [space-router](https://github.com/KidkArolis/space-router)
+* [react](https://reactjs.org/) / [preact](https://preactjs.com/) / custom - component rendering.
+* [tiny-atom](https://qubitproducts.github.io/tiny-atom) - state management.
+* [space-router](https://github.com/KidkArolis/space-router) - routing.
 
 Each of these libraries is independent and can be useful on their own. Nebula is just one, simple way to combine the three for common cases.
 
