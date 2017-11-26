@@ -1,0 +1,17 @@
+{
+  "name": "nebula-preact-example",
+  "version": "1.0.0",
+  "description": "Nebula+Preact example",
+  "scripts": {
+    "start": "../../node_modules/.bin/jetpack .",
+    "test": "standard"
+  },
+  "main": "app.js",
+  "author": "Karolis Narkevicius",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {},
+  "jetpack": {
+    "jsx": "React.createElement"
+  }
+}
