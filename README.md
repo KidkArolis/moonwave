@@ -1,4 +1,4 @@
-# Nebula
+# 🌌 Nebula
 
 Nebula is a small framework for building web applications with JavaScript.
 
@@ -10,7 +10,7 @@ Nebula is 100 lines of code, because it combines an existing set of composable l
 
 Each of these libraries is independent and can be useful on their own. Nebula is just one, simple way to combine the three for common cases.
 
-If Nebula doesn't quite fit your needs when your application grows larger, you can combine the three provided libraries (or others) in your own way and so only use Nebula as a reference implementation.
+If Nebula doesn't quite fit your needs as your application grows, you can combine the three libraries, or others, in your own way and use Nebula as a reference implementation.
 
 ## Usage
 
