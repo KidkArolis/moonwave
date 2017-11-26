@@ -27,7 +27,7 @@ const routes = [
   ['/', MainView]
 ]
 
-// actions is how we'll update application state
+// actions is how we update application state
 const actions = {
   update: (get, split, title) => {
     split({ title })
@@ -41,7 +41,9 @@ const evolve = (get, split, action) => {
   actions[action.type](get, split, action.payload)
 }
 
-// the preact component receives
+// the preact component receives full application state
+// and a `split` function for dispatching actions or updates
+// use ConnectAtom component to map state/split to props
 function MainView ({ state, split }) {
   return (
     <div>
@@ -55,6 +57,7 @@ function MainView ({ state, split }) {
   }
 }
 
+// assemble all the pieces
 nebula()
   .state({ title: 'Default title' })
   .evolve(evolve)
@@ -75,45 +78,128 @@ example-app   0.5KB
 
 ### API
 
-#### nebula(options)
+#### const app = nebula(options)
 
 Create an app. Available options are:
 
-```
-{
-  // see https://github.com/QubitProducts/tiny-atom for full docs
-  store: {
-    merge: (state, update) => Object.assign({}, state, update),
-    debug: false
-  }
+* `store.merge` - custom state merge strategy, default implementation is `(state, update) => Object.assign({}, state, update)`.
+* `store.debug` - a debug hook. Set to `debug: require('nebula/log')` for console logger or `debug: require('nebula/devtools')` for integration with Redux dev tools.
+* `router.mode` - one of `history`, `hash`, `memory`. Default is `history`.
+* `router.interceptLinks` - whether clicks on links are automatically handled by the router. Default is `true`.
+* `router.qs` - custom query string parser. Object of shape { parse, stringify }.
 
-  // see https://github.com/KidkArolis/space-router for full docs
-  router: {
-    mode: 'history' | 'hash' | 'memory',
-    interceptLinks: true,
-    qs: { parse, stringify }
-  }
-}
-```
+See [tiny-atom docs](https://github.com/QubitProducts/tiny-atom) for more information on the store. See [space-router docs](https://github.com/KidkArolis/space-router) for more information on the router.
 
-#### nebula.state()
+#### app.state()
 
 Provide initial state.
 
-#### nebula.evolve()
+```js
+app.state({})
+app.state({ count: 0 })
+app.state(Immutable.Map({})) // note: in this case, you'll need to provide a custom store.merge function
+```
+
+#### app.evolve()
 
 Provide a function of signature `(get, split, action)` that will receive all actions that were `split` by the app.
 
 **Note**: think of `split` as `dispatch` if you're familiar with that.
 
-#### nebula.routes()
+```js
+app.evolve((get, split, action) => {
+  actions[action.type](get, split, action.payload)
+})
 
-Provide an array of routes.
+app.evolve(async (get, split, action) => {
+  switch (action.type) {
+    case 'increment':
+      split({ count: get().count + 1 })
+      break
+    case 'decrement':
+      split({ count: get().count - 1 })
+      break
+    case 'fetch':
+      split({ loading: true })
+      const res = await axios.get('/data')
+      split({ items: res.data, loading: false })
+      break;
+  }
+})
+```
 
-#### nebula.mount()
+#### app.routes()
 
-Mount the app to a DOM element. Initialise the store, router and render the app into DOM.
+Provide an array of routes. An optional second argument can be used for a custom [`onTransition`](https://github.com/KidkArolis/space-router#startontransition) implementation.
 
-#### nebula.unmount()
+```js
+// if you don't need routing
+app.routes([
+  ['*', SinglePage]
+])
+
+// common case
+app.routes([
+  ['/', Home],
+  ['/Space', Space],
+  ['/Ocean', Ocean]
+])
+
+// nested routes
+app.routes([
+  ['', Shell, [
+    ['/inbox', Inbox],
+    ['/account', Account, [
+      ['password', Password]
+    ]],
+    ['*', NotFound]
+  ]]
+])
+
+// async route loading
+app.routes([
+  ['/', { load: () => System.import('./pages/Index') }],
+  ['/Space', { load: () => System.import('./pages/Space') }]
+], async function onTransition (route, data) {
+  await Promise.all(data.map(async d => {
+    if (!d.Component) d.Component = await d.load()
+  }))
+  atom.split({ route })
+})
+```
+
+To navigate around your application programmatically, you `split` an action like so:
+
+```js
+function MyApp ({ split }) {
+  return <form onSubmit={onSubmit}>...</form>
+
+  function onSubmit () {
+    const id = 1
+    split('navigate', {
+      // path
+      path: `/space/${id}`,
+      // query params
+      query: { angle: 0 },
+      // push vs replace the url
+      replace: false
+    })
+  }
+}
+```
+
+#### app.mount()
+
+Mount the app to a DOM element. Initialise the store, router and render the app into DOM. Defaults to `document.body`
+
+```js
+app.mount(document.getElementById('root'))
+```
+
+#### app.unmount()
 
 Stop the router, unrender the app from DOM.
+
+```js
+app.unmount()
+```

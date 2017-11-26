@@ -18,7 +18,7 @@ function preactNebula (options) {
 const render = (app) => (atom) => {
   const { router, options } = app
   const route = atom.get().route
-  const components = router.data(route.pattern)
+  const components = router.data(route.pattern).map(c => c.Component ? c.Component : c)
   const App = components.reduceRight((children, Component) => (
     <Component state={atom.get()} split={atom.split} route={route}>{children}</Component>
   ), null)
