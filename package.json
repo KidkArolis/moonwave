@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "jetpack": "^0.3.1",
+    "np": "^2.17.0",
     "preact": "^8.2.6",
     "react": "^16.1.1",
     "react-dom": "^16.1.1"
