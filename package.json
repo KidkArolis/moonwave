@@ -1,11 +1,11 @@
 {
-  "name": "nebula",
+  "name": "moonwave",
   "version": "0.0.0",
   "description": "A small web application framework.",
   "scripts": {
     "test": "standard"
   },
-  "main": "nebula",
+  "main": "moonwave",
   "author": "Karolis Narkevicius",
   "license": "ISC",
   "dependencies": {

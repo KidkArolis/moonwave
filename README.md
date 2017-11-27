@@ -1,26 +1,26 @@
-# 🌌 Nebula
+# 🌌 Moonwave
 
-Nebula is a small framework for building web applications with JavaScript.
+Moonwave is a small framework for building web applications with JavaScript.
 
-Nebula is 100 lines of code, because it combines an existing set of composable libraries.
+Moonwave is 100 lines of code, because it combines an existing set of composable libraries.
 
 * [react](https://reactjs.org/) / [preact](https://preactjs.com/) / custom - component rendering.
 * [tiny-atom](https://qubitproducts.github.io/tiny-atom) - state management.
 * [space-router](https://github.com/KidkArolis/space-router) - routing.
 
-Each of these libraries is independent and can be useful on their own. Nebula is just one, simple way to combine the three for common cases.
+Each of these libraries is independent and can be useful on their own. Moonwave is just one, simple way to combine the three for common cases.
 
-If Nebula doesn't quite fit your needs as your application grows, you can combine the three libraries, or others, in your own way and use Nebula as a reference implementation.
+If Moonwave doesn't quite fit your needs as your application grows, you can combine the three libraries, or others, in your own way and use Moonwave as a reference implementation.
 
 ## Usage
 
-    yarn add nebula
+    yarn add moonwave
 
 ## Example
 
 ```js
 const Preact = require('preact')
-const { nebula } = require('nebula/preact')
+const { moonwave } = require('moonwave/preact')
 
 // each route maps to a Preact component
 const routes = [
@@ -58,7 +58,7 @@ function MainView ({ state, split }) {
 }
 
 // assemble all the pieces
-nebula()
+moonwave()
   .state({ title: 'Default title' })
   .evolve(evolve)
   .routes(routes)
@@ -78,12 +78,12 @@ example-app   0.5KB
 
 ### API
 
-#### const app = nebula(options)
+#### const app = moonwave(options)
 
 Create an app. Available options are:
 
 * `store.merge` - custom state merge strategy, default implementation is `(state, update) => Object.assign({}, state, update)`.
-* `store.debug` - a debug hook. Set to `debug: require('nebula/log')` for console logger or `debug: require('nebula/devtools')` for integration with Redux dev tools.
+* `store.debug` - a debug hook. Set to `debug: require('moonwave/log')` for console logger or `debug: require('moonwave/devtools')` for integration with Redux dev tools.
 * `router.mode` - one of `history`, `hash`, `memory`. Default is `history`.
 * `router.interceptLinks` - whether clicks on links are automatically handled by the router. Default is `true`.
 * `router.qs` - custom query string parser. Object of shape { parse, stringify }.
@@ -127,6 +127,23 @@ app.evolve(async (get, split, action) => {
   }
 })
 ```
+
+#### app.actions()
+
+Provide a map of actions. Can be used instead of the evolve for common cases.
+
+```js
+app.actions({
+  increment: (get, split, x) => {
+    split({ count: get().count + x })
+  },
+  decrement: (get, split, x) => {
+    split({ count: get().count - x })
+  }
+})
+```
+
+If both `app.actions()` and `app.evolve()` is used, the `actions` provided is passed as the 4th argument to the evolve function.
 
 #### app.routes()
 

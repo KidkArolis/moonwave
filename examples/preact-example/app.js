@@ -1,5 +1,5 @@
 const Preact = require('preact')
-const { nebula } = require('../../preact')
+const { moonwave } = require('../../preact')
 
 // each route maps to a Preact component
 const routes = [
@@ -34,7 +34,7 @@ function MainView ({ state, split }) {
   }
 }
 
-nebula()
+moonwave()
   .state({ title: 'Default title' })
   .evolve(evolve)
   .routes(routes)

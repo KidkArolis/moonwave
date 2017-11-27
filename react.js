@@ -1,10 +1,10 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
 const { ProvideAtom, ConnectAtom } = require('tiny-atom/react')
-const { nebula } = require('./nebula') 
+const { moonwave } = require('./moonwave') 
 
-function reactNebula (options) {
-  const app = nebula(options)
+function reactMoonwave (options) {
+  const app = moonwave(options)
   app.render(render)
   app.unrender(unrender)
   return app
@@ -67,4 +67,4 @@ function propsValidation (props, propName, componentName) {
   return new Error('Invalid prop ' + propName + ' supplied to componentName')
 }
 
-module.exports = { nebula: reactNebula, ProvideAtom, ConnectAtom, ProvideRouter }
+module.exports = { moonwave: reactMoonwave, ProvideAtom, ConnectAtom, ProvideRouter }

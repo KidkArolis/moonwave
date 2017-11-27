@@ -1,7 +1,7 @@
 {
-  "name": "nebula-preact-example",
+  "name": "moonwave-preact-example",
   "version": "1.0.0",
-  "description": "Nebula+Preact example",
+  "description": "Moonwave+Preact example",
   "scripts": {
     "start": "../../node_modules/.bin/jetpack .",
     "test": "standard"

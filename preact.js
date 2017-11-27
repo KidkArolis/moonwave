@@ -1,9 +1,9 @@
 const Preact = require('preact')
 const { ProvideAtom, ConnectAtom } = require('tiny-atom/preact')
-const { nebula } = require('./nebula') 
+const { moonwave } = require('./moonwave') 
 
-function preactNebula (options) {
-  const app = nebula(options)
+function preactMoonwave (options) {
+  const app = moonwave(options)
   app.render(render)
   app.unrender(unrender)
   return app
@@ -55,4 +55,4 @@ class ProvideRouter extends Preact.Component {
   }
 }
 
-module.exports = { nebula: preactNebula, ProvideAtom, ConnectAtom, ProvideRouter }
+module.exports = { moonwave: preactMoonwave, ProvideAtom, ConnectAtom, ProvideRouter }
