@@ -1,4 +1,4 @@
-# 🌌 Moonwave
+# 🌗 Moonwave
 
 Moonwave is a small framework for building web applications with JavaScript.
 
