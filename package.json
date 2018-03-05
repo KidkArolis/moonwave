@@ -4,7 +4,7 @@
   "description": "A small web application framework.",
   "scripts": {
     "test": "standard",
-    "publish": "node ./tasks/publish"
+    "release": "node ./tasks/release"
   },
   "main": "moonwave",
   "author": "Karolis Narkevicius",

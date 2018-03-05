@@ -33,7 +33,7 @@ const files = [
   }
 
   await sh(`yarn version`)
-  const version = require('package.json').version
+  const version = require('./package.json').version
 
   fs.writeFileSync(
     './dist/package.json',
