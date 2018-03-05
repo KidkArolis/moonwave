@@ -1,7 +1,7 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
 const { ProvideAtom, ConnectAtom } = require('tiny-atom/react')
-const { moonwave } = require('./moonwave') 
+const { moonwave } = require('./moonwave')
 
 function reactMoonwave (options) {
   const app = moonwave(options)

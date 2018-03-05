@@ -1,6 +1,6 @@
 const Preact = require('preact')
 const { ProvideAtom, ConnectAtom } = require('tiny-atom/preact')
-const { moonwave } = require('./moonwave') 
+const { moonwave } = require('./moonwave')
 
 function preactMoonwave (options) {
   const app = moonwave(options)

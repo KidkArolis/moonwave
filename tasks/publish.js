@@ -1,3 +1,4 @@
+const fs = require('fs')
 const shell = require('execa').shell
 
 const sh = (...args) => shell(...args, { stdio: 'inherit' })
@@ -20,7 +21,6 @@ const files = [
   await sh('rm -rf dist')
   await sh('mkdir -p dist')
 
-
   for (let file of files) {
     await sh(`cp ${file} dist`)
     if (file.endsWith('.js')) {
@@ -39,7 +39,7 @@ const files = [
     './dist/package.json',
     JSON.stringify(
       Object.assign({}, require('./dist/package.json'), { version })
-    , null, 2)
+      , null, 2)
   )
 
   process.chdir('./dist')
