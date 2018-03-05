@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "A small web application framework.",
   "scripts": {
-    "test": "standard"
+    "test": "standard",
+    "publish": "node ./tasks/publish"
   },
   "main": "moonwave",
   "author": "Karolis Narkevicius",
@@ -13,6 +14,8 @@
     "tiny-atom": "^0.5.0"
   },
   "devDependencies": {
+    "buble": "^0.19.3",
+    "execa": "^0.9.0",
     "jetpack": "^0.3.1",
     "np": "^2.17.0",
     "preact": "^8.2.6",
