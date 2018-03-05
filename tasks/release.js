@@ -43,5 +43,5 @@ const files = [
   )
 
   process.chdir('./dist')
-  await sh('yarn publish')
+  await sh(`yarn publish --new-version ${version}`)
 }())
