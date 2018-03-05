@@ -1,6 +1,6 @@
 {
   "name": "moonwave",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A small web application framework.",
   "scripts": {
     "test": "standard",
